@@ -1,0 +1,49 @@
+{
+    "users": [
+        {   
+            "u_id": 0,
+            "hashed_password": "hashed_password",
+            "token": "auth_token",
+            "email": "email.com",
+            "icon": "",
+            "username": "Edison",
+            "recipes": ["recipe_id"],
+            "followers": ["u_id"],
+            "followings": ["u_id"],
+            "collections": ["recipe_id"]
+        }
+    ],
+    "recipes": [
+        {
+            "name": "",
+            "recipe_id": 0,
+            "image": "img.jpg",
+            "category": "",
+            "ingredients": [{
+                "ingredientName": "Orange",
+                "ingredientCategory": "Fruit"
+            }],
+            "description": "",
+            "created_by": "u_id",
+            "number_of_likes": 0,
+            "liked_by": ["u_id"],
+            "number_of_collections": 0,
+            "collected_by": ["u_id"],
+            "rating": 5,
+            "number_of_rating": 0,
+            "comments": ["message", "message 2"]
+        }
+    ],
+    "ingredients": [
+        {
+            "category": "Fruit",
+            "matched_ingredients": [
+                {
+                    "name": "Egg",
+                    "count": 0
+                }
+            ]
+        }
+    ]
+}
+
