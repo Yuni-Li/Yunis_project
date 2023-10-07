@@ -1,0 +1,55 @@
+{
+    "entities": [
+      {
+        "x": 0,
+        "y": 0,
+        "type": "wall"
+      },
+      {
+        "x": 1,
+        "y": 0,
+        "type": "wall"
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "type": "player"
+      },
+      {
+        "x": 6,
+        "y": 1,
+        "type": "sword"
+      },
+      {
+        "x": 13,
+        "y": 4,
+        "type": "bomb"
+      },
+      {
+        "x": 3,
+        "y": 5,
+        "type": "mercenary"
+      },
+      {
+        "x": 7,
+        "y": 10,
+        "type": "treasure"
+      },
+      {
+        "x": 11,
+        "y": 10,
+        "type": "invincibility_potion"
+      }
+    ],
+    "goal-condition": {
+      "goal": "AND",
+      "subgoals": [
+        {
+          "goal": "enemies"
+        },
+        {
+          "goal": "treasure"
+        }
+      ]
+    }
+  }

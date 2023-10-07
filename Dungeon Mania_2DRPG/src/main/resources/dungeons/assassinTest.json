@@ -1,0 +1,35 @@
+{
+    "entities": [
+      {
+        "x": 1,
+        "y": 1,
+        "type": "player"
+      },
+      {
+        "x": 1,
+        "y": 7,
+        "type": "assassin"
+      },
+      {
+        "x": 2,
+        "y": 1,
+        "type": "treasure"
+      },
+      {
+        "x": 3,
+        "y": 1,
+        "type": "one_ring"
+      }
+    ],
+    "goal-condition": {
+      "goal": "AND",
+      "subgoals": [
+        {
+          "goal": "enemies"
+        },
+        {
+          "goal": "treasure"
+        }
+      ]
+    }
+  }

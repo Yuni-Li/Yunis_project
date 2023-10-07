@@ -1,0 +1,273 @@
+////////////////////////////////////////////////////////////////////////
+// COMP2521 20T2 ... the Fury of Dracula
+// GameView.c: GameView ADT implementation
+//
+// 2014-07-01	v1.0	Team Dracula <cs2521@cse.unsw.edu.au>
+// 2017-12-01	v1.1	Team Dracula <cs2521@cse.unsw.edu.au>
+// 2018-12-31	v2.0	Team Dracula <cs2521@cse.unsw.edu.au>
+// 2020-07-10   v3.0    Team Dracula <cs2521@cse.unsw.edu.au>
+//
+////////////////////////////////////////////////////////////////////////
+
+#include <assert.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Game.h"
+#include "GameView.h"
+#include "Map.h"
+#include "Places.h"
+// add your own #includes here
+#define ABBREVLEN 2
+
+// TODO: ADD YOUR OWN STRUCTS HERE
+
+typedef struct MoveName {
+    char abbrev[ABBREVLEN];
+}MoveName;
+
+typedef struct PlayerMove {
+    int totalMove;
+    MoveName *history;
+}PlayerMove;
+
+struct gameView {
+	struct playerMove move[NUM_PLAYERS];
+};
+
+
+PlaceId DSpecialMoveToLoc(int totalMove, MoveName *DHisory);
+int isSpecMove(char *abbrev);
+void addMove(GameView gv, int player, char move[ABBREVLEN]);
+int findCurrPlayer(char currtype);
+////////////////////////////////////////////////////////////////////////
+// Constructor/Destructor
+
+GameView GvNew(char *pastPlays, Message messages[])
+{
+	
+	GameView new = malloc(sizeof(*new));
+	if (new == NULL) {
+		fprintf(stderr, "Couldn't allocate GameView!\n");
+		exit(EXIT_FAILURE);
+	}
+    
+    // initialized the move matrix
+    PlayerMove m = malloc(NUM_PLAYERS * sizeof(*m));
+    for (int i = 0; i < NUM_PLAYERS; i++) {
+        m[i]->totalMove = 0;
+    }
+    
+    // enter the places
+    int currPlayer = -1;
+    char place[ABBREVLEN];
+    for (int i = 0; pastPlays[i] != '\0'; i++) {
+        if (i % 7 == 0) currPlayer = findCurrPlayer(pastPlays[i]);
+        if (i % 7 == 1) place[0] = pastPlays[i];
+        if (i % 7 == 2) {
+            place[1] = pastPlays[i];
+            addMove(new, currPlayer, place);
+        }
+    }
+    
+	return new;
+}
+
+void GvFree(GameView gv)
+{
+	// TODO: REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	free(gv);
+}
+
+////////////////////////////////////////////////////////////////////////
+// Game State Information
+
+Round GvGetRound(GameView gv)
+{
+	return gv->move[PLAYER_DRACULA].totalMove;
+}
+
+Player GvGetPlayer(GameView gv)
+{
+	int num_D_move = gv->move[PLAYER_DRACULA].totalMove;
+	if (gv->move[PLAYER_LORD_GODALMING].totalMove == num_D_move) 
+	    return PLAYER_LORD_GODALMING;
+	else if (gv->move[PLAYER_DR_SEWARD].totalMove == num_D_move) 
+	    return PLAYER_DR_SEWARD;
+	else if (gv->move[PLAYER_VAN_HELSING].totalMove == num_D_move) 
+	    return PLAYER_VAN_HELSING;
+	else if (gv->move[PLAYER_MINA_HARKER].totalMove == num_D_move) 
+	    return PLAYER_MINA_HARKER;
+	else return PLAYER_DRACULA;
+}
+
+int GvGetScore(GameView gv)
+{
+	// TODO: REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	return 0;
+}
+
+int GvGetHealth(GameView gv, Player player)
+{
+	// TODO: REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	return 0;
+}
+
+PlaceId GvGetPlayerLocation(GameView gv, Player player)
+{
+	// get last move
+	int total = gv->move[player].totalMove;
+    
+    if (total == 0) {
+        return NOWHERE;
+    } else {
+        char *lastmove = gv->move[player].history[total - 1];
+        PlaceId currp = placeAbbrevToId(lastmove);
+        if (player != PLAYER_DRACULA)
+            return currp;
+        else {
+            if (isSpecMove(lastmove))
+                return DSpecialMoveToLoc(total, gv->move[player].history);
+            else
+                return currp;
+        }
+    }
+}
+
+PlaceId GvGetVampireLocation(GameView gv)
+{
+	
+	return NOWHERE;
+}
+
+PlaceId *GvGetTrapLocations(GameView gv, int *numTraps)
+{
+	// TODO: REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	*numTraps = 0;
+	return NULL;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Game History
+
+PlaceId *GvGetMoveHistory(GameView gv, Player player,
+                          int *numReturnedMoves, bool *canFree)
+{
+	// TODO: REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	*numReturnedMoves = 0;
+	*canFree = false;
+	return NULL;
+}
+
+PlaceId *GvGetLastMoves(GameView gv, Player player, int numMoves,
+                        int *numReturnedMoves, bool *canFree)
+{
+	// TODO: REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	*numReturnedMoves = 0;
+	*canFree = false;
+	return NULL;
+}
+
+PlaceId *GvGetLocationHistory(GameView gv, Player player,
+                              int *numReturnedLocs, bool *canFree)
+{
+	// TODO: REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	*numReturnedLocs = 0;
+	*canFree = false;
+	return NULL;
+}
+
+PlaceId *GvGetLastLocations(GameView gv, Player player, int numLocs,
+                            int *numReturnedLocs, bool *canFree)
+{
+	// TODO: REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	*numReturnedLocs = 0;
+	*canFree = false;
+	return 0;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Making a Move
+
+PlaceId *GvGetReachable(GameView gv, Player player, Round round,
+                        PlaceId from, int *numReturnedLocs)
+{
+	// TODO: REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	*numReturnedLocs = 0;
+	return NULL;
+}
+
+PlaceId *GvGetReachableByType(GameView gv, Player player, Round round,
+                              PlaceId from, bool road, bool rail,
+                              bool boat, int *numReturnedLocs)
+{
+	// TODO: REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	*numReturnedLocs = 0;
+	return NULL;
+}
+
+////////////////////////////////////////////////////////////////////////
+// GvNew interface functions
+	
+int findCurrPlayer(char currtype)
+{
+    int currPlayer = -1;
+    if (currtype == 'G') currPlayer = PLAYER_LORD_GODALMING;
+    if (currtype == 'S') currPlayer = PLAYER_DR_SEWARD;
+    if (currtype == 'H') currPlayer = PLAYER_VAN_HELSING;
+    if (currtype == 'M') currPlayer = PLAYER_MINA_HARKER;
+    if (currtype == 'D') currPlayer = PLAYER_DRACULA;
+    return currPlayer;
+}
+
+void addMove(GameView gv, int player, char move[ABBREVLEN])
+{
+    
+    MoveName pl_mv = gv->move[player];
+    int pl_mv_num = pl_mv->totalMove;
+    // add new move
+    if (pl_mv_num == 0) 
+        pl_mv->history->abbrev = move;
+    else {
+        int new_mv_num = pl_mv_num - 1;
+        MoveName new_mv = calloc(pl_mv->history, sizeof(MoveName));
+        char *new_mv.abbrev = malloc(sizeof(char *));
+        new_mv->abbrev = move;
+        pl_mv->history[new_mv_num] = new_mv;
+    }
+    gv->move[player].totalMove++;
+}
+
+int isSpecMove(char *abbrev)
+{
+    return "HI" || "D1" || "D2" || "D3" || "D4" || "D5" || "TP";
+}
+
+PlaceId DSpecialMoveToLoc(int totalMove, MoveName *DHisory)
+{
+    
+    char *lastmove = DHisory[totalMove - 1];
+    if (strcmp("HI", lastmove) == 0) {
+        assert(totalMove - 2 > 0);
+        return placeAbbrevToId(DHistory[totalMove - 2]);
+    } else if (strcmp("D1", lastmove) == 0) {
+        assert(totalMove - 2 > 0);
+        return placeAbbrevToId(DHistory[totalMove - 2]);
+    } else if (strcmp("D2", lastmove) == 0) {
+        assert(totalMove - 3 > 0);
+        return placeAbbrevToId(DHistory[totalMove - 3]);
+    } else if (strcmp("D3", lastmove) == 0) {
+        assert(totalMove - 4 > 0);
+        return placeAbbrevToId(DHistory[totalMove - 4]);
+    } else if (strcmp("D4", lastmove) == 0) {
+        assert(totalMove - 5 > 0);
+        return placeAbbrevToId(DHistory[totalMove - 5]);
+    } else if (strcmp("D5", lastmove) == 0) {
+        assert(totalMove - 6 > 0);
+        return placeAbbrevToId(DHistory[totalMove - 6]);
+    } else if (strcmp("TP", lastmove) == 0) {
+        return placeAbbrevToId("CD");
+    }
+
+}

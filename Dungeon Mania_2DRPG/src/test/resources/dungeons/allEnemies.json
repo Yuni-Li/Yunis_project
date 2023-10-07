@@ -1,0 +1,34 @@
+{
+    "entities": [
+      {
+        "x": 1,
+        "y": 1,
+        "type": "player"
+      },
+      {
+        "x": 1,
+        "y": 7,
+        "type": "assassin"
+      },
+      {
+        "x": 4,
+        "y": 7,
+        "type": "mercenary"
+      },
+      {
+        "x": 4,
+        "y": 8,
+        "type": "zombie_toast"
+      },
+      {
+        "x": 10,
+        "y": 7,
+        "type": "hydra"
+      },
+      {
+        "x": 4,
+        "y": 5,
+        "type": "spider"
+      }
+    ]
+  }
