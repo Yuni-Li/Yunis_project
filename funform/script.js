@@ -6,7 +6,7 @@ const dob = document.getElementById('dob');
 const buildingType = document.getElementById('buildingType');
 var features = document.querySelectorAll('input[name=features]');
 const selectBtn = document.getElementById('selectAllBtn');
-const resetBtn = document.getElementById('reset');
+const resetBtn = document.getElementById('resetBtn');
 var text = document.getElementById("text");
 
 // Main
@@ -59,27 +59,12 @@ features.forEach(feature => feature.onchange = () => {
 
 // Switch between select and deselect button
 selectBtn.onclick = () => {
-  if (selectBtn.value === 'Select All') {
-    features.forEach(feature => {
-      feature.checked = true;
-      feature.onchange = () => {
-        checkValidInput();
-        updateSelectBtn();
-      };
-    });
-    selectBtn.value = 'Deselect All';
-  } else {
-    features.forEach(feature => {
-      feature.checked = false;
-      feature.onchange = () => {
-        checkValidInput();
-        updateSelectBtn();
-      };
-    });
-    selectBtn.value = 'Select All';
-  }
-  checkValidInput();
-}
+  const selectAll = selectBtn.value === 'Select All';
+  features.forEach(feature => feature.checked = selectAll);
+  updateSelectBtn();
+};
+
+resetBtn.onclick = () => {selectBtn.value = 'Select All'};
 
 
 // Helper Functions
@@ -121,9 +106,7 @@ function getFeatures() {
 // If all buttons are selected/deselected manually
 // Change current button to select/deselect all
 function updateSelectBtn() {
-  var featuresArray = Array.from(features);
-  const allChecked = featuresArray.every(feature => feature.checked);
-  const allUnChecked = featuresArray.every(feature => !feature.checked);
-  if (allChecked) selectBtn.value = 'Deselect All';
-  else if (!allUnChecked) selectBtn.value = 'Select All';
+  const allChecked = Array.from(features).every(feature => feature.checked);
+  selectBtn.value = allChecked ? 'Deselect All' : 'Select All';
+  checkValidInput();
 }
