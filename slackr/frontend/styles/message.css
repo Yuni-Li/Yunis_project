@@ -1,0 +1,63 @@
+.msg-container {
+  position: relative;
+  display: flex;
+  margin: 20px 0;
+}
+
+.empty-msg {
+  top: 40%;
+  left: 50%;
+  color: #675f5f;
+  font-size: 28px;
+}
+
+.empty-msg .no-message-channel {
+  text-align: center;
+}
+
+.msg-avatar-container .msg-logo {
+  width: 40px;
+  height: 40px;
+  /* border: 1px solid #bdb8b8; */
+}
+
+.msg-container .msg-details-container {
+  display: block;
+  margin: 0 10px;
+}
+
+.msg-details-container .msg-sender-detail-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 10px;
+  color: #7e7979;
+
+}
+
+.msg-details-container .msg-content {
+  border: 1px solid #bdb8b8;
+  padding: 8px 10px;
+  border-radius: 5px;
+  background-color: #f5f4f4;
+}
+
+.my-msg {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 0;
+
+}
+
+.my-msg .msg-sender {
+  text-align: end;
+}
+
+.my-msg .msg-details-container {
+  margin: 0 10px;
+}
+
+.my-msg .msg-content {
+  background: linear-gradient(to bottom right, #dbafd6, #e8cfda);
+
+}

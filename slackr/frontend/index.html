@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Slackr</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- You can add your styles and scripts here -->
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/provided.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/login.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/register.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/channel.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/message.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/mobile.css" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/sweetalert2/11.7.27/sweetalert2.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <script type="module" src="src/helpers.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+  </head>
+</head>
+
+<body>
+  <!-- This is an example app structure, you can modify this as much as you choose -->
+  <header class="banner">
+    <!-- <h1>Slackr</h1> -->
+  </header>
+  <main role="main">
+    <section id="loading-page">
+      <img src="images/loading.svg" alt="Loading...">
+    </section>
+    <section id="signIn" class="page login-container">
+      <div class="login-box">
+        <h1>Sign In</h1>
+        <p class="input-header">Email Address</p>
+        <input type="text" id="loginEmail" placeholder="Enter valid email">
+        <p class="input-header">Password</p>
+        <input type="password" id="loginPassword" placeholder="Enter password">
+        <button id="loginBtn">LOGIN</button>
+        <br>
+        <span>Don't have an account?</span>
+        <a href="/#register">Register</a>
+      </div>
+    </section>
+    <section id="register" class="page register-container">
+      <div class="register-box">
+        <h1>Sign Up</h1>
+        <p class="input-header">Email Address</p>
+        <input type="text" id="registerEmail" placeholder="Enter valid email">
+        <p class="input-header">Username</p>
+        <input type="text" id="registerName" placeholder="Enter valid username">
+        <p class="input-header">Password</p>
+        <input type="password" id="registerPassword1" placeholder="Enter password">
+        <p class="input-header">Confirm Password</p>
+        <input type="password" id="registerPassword2" placeholder="Enter the same password">
+        <button id="registerBtn">REGISTER</button>
+        <br>
+        <span>Already have an account?</span>
+        <a href="/#login">Login</a>
+      </div>
+    </section>
+    <section id="channel" class="page channel-container">
+      <div class="channel-left-container">
+        <header>
+          <img class="user-avatar" src="images/defaultAvatar.png" alt="default-avatar">
+          <button class="btn btn-light create-channel" id="createChannelBtn"> + Create Channel</button>
+          <!-- Create Channnel Modal starts here,
+            Source url: https://getbootstrap.com/docs/5.3/components/modal/#static-backdrop -->
+          <div class="modal fade" id="createChannelModal" tabindex="-1" aria-labelledby="createChannelModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="createChannelModalLabel">Create Channel</h1>
+                  <button type="button" class="btn-close close-create-btn" id="closeChannelModal" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="channelName" class="col-form-label">Channel Name:</label>
+                      <input type="text" class="form-control" id="channelName">
+                    </div>
+                    <div class="mb-3">
+                      <label for="channelDescription" class="col-form-label">Description:</label>
+                      <textarea class="form-control" id="channelDescription" placeholder="Enter description"></textarea>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="channelPraviteCheck">
+                      <label class="form-check-label" for="channelPraviteCheck">Private Channel</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="createChannel">Create</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Create Channel Modal ends here -->
+        </header>
+        <div id="channel-list"></div>
+        <div class="channel-left-footer">
+          <button id="logoutBtn" class="btn btn-light">Log Out</button>
+        </div>
+      </div>
+      <div class="channel-right-container">
+        <header id="channel-right-header"></header>
+        <div id="message-box" class="channel-right-body"></div>
+        <div class="channel-right-footer">
+          <img class="emoji-icon" src="images/emoji.png" alt="emoji">
+          <input class="message-input" placeholder="Start a new message">
+          <img class="send-icon" src="images/send.png" alt="send">
+          <img class="image-icon" src="images/image.png" alt="image">
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <script src="https://cdn.bootcdn.net/ajax/libs/sweetalert2/11.7.27/sweetalert2.all.min.js"></script>
+  <script type="module" src="src/utils/request.js"></script>
+  <script type="module" src="src/main.js"></script>
+  <script type="module" src="src/pages/login.js"></script>
+  <script type="module" src="src/pages/register.js"></script>
+  <script type="module" src="src/pages/logout.js"></script>
+  <script type="module" src="src/pages/channel.js"></script>
+  <script type="module" src="src/pages/messages.js"></script>
+
+  <!-- Modals from bootstrap -->
+  <!-- Show Channel Profile starts here 
+       Source url: https://getbootstrap.com/docs/5.3/components/modal/-->
+       <div class="modal fade" id="channelProfileModal" tabindex="-1" aria-labelledby="channelProfileLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="channelProfileLabel">Channel Profile</h1>
+              <button type="button" class="btn-close close-create-btn close-channel-profile" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="channelProfileBody"></div>
+          </div>
+        </div>
+      </div>
+  <!-- Show Channel Profile ends here -->
+
+  <!-- Show Channel Members starts here 
+      Source url: https://getbootstrap.com/docs/5.3/components/modal/-->
+      <div class="modal fade" id="channelMembersModal" tabindex="-1" aria-labelledby="channelMembersLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="channelMembersLabel">Channel Members</h1>
+            <button type="button" class="btn-close close-create-btn close-channel-members" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="channelMembersBody"></div>
+        </div>
+      </div>
+    </div>
+  <!-- Show Channel Members ends here -->
+
+  <!-- Drop Down starts here
+       Source url: https://getbootstrap.com/docs/5.3/components/dropdowns/#overview -->
+       <div class="dropdown">
+        <a class="btn btn-light dropdown-toggle" href="#" role="button" aria-expanded="false"></a>
+        <ul class="dropdown-menu"></ul>
+      </div>
+  <!-- Drop Down ends here -->
+  
+</body>
+
+</html>

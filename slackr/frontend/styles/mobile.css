@@ -1,0 +1,21 @@
+.mobile .page {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile .channel-left-container {
+  width: 100vw;
+  height: 50vh;
+}
+
+.mobile .channel-right-body {
+  height: 50vh;
+}
+
+.mobile #channel-list {
+  height: 35vh;
+}
+
+.mobile .dropdown-toggle::after {
+  display: none;
+}
