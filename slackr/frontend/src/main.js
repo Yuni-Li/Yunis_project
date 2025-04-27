@@ -9,7 +9,7 @@ function loadingPage() {
   const loading = document.getElementById("loading-page");
   setTimeout(() => {
     loading.style.display = "none";
-  }, 600);
+  }, 300);
 }
 
 function initPage() {

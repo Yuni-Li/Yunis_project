@@ -34,34 +34,34 @@
       <img src="images/loading.svg" alt="Loading...">
     </section>
     <section id="signIn" class="page login-container">
-      <div class="login-box">
+      <form class="login-box">
         <h1>Sign In</h1>
-        <p class="input-header">Email Address</p>
-        <input type="text" id="loginEmail" placeholder="Enter valid email">
-        <p class="input-header">Password</p>
-        <input type="password" id="loginPassword" placeholder="Enter password">
+        <label for="loginEmail">Email Address</label>
+        <input type="text" id="loginEmail" placeholder="Enter valid email" autocomplete="off">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter password" autocomplete="off">
         <button id="loginBtn">LOGIN</button>
         <br>
         <span>Don't have an account?</span>
         <a href="/#register">Register</a>
-      </div>
+      </form>
     </section>
     <section id="register" class="page register-container">
-      <div class="register-box">
+      <form class="register-box">
         <h1>Sign Up</h1>
-        <p class="input-header">Email Address</p>
+        <label for="registerEmail">Email Address</label>
         <input type="text" id="registerEmail" placeholder="Enter valid email">
-        <p class="input-header">Username</p>
-        <input type="text" id="registerName" placeholder="Enter valid username">
-        <p class="input-header">Password</p>
-        <input type="password" id="registerPassword1" placeholder="Enter password">
-        <p class="input-header">Confirm Password</p>
-        <input type="password" id="registerPassword2" placeholder="Enter the same password">
+        <label for="registerName">Username</label>
+        <input type="text" id="registerName" placeholder="Enter 0-15 letters">
+        <label for="registerPassword1">Password</label>
+        <input type="password" id="registerPassword1" placeholder="Enter password" autocomplete="off">
+        <label for="registerPassword2">Confirm Password</label>
+        <input type="password" id="registerPassword2" placeholder="Enter the same password" autocomplete="off">
         <button id="registerBtn">REGISTER</button>
         <br>
         <span>Already have an account?</span>
         <a href="/#login">Login</a>
-      </div>
+      </form>
     </section>
     <section id="channel" class="page channel-container">
       <div class="channel-left-container">

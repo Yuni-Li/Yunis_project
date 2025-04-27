@@ -31,6 +31,22 @@ document.querySelector("#registerBtn").addEventListener("click", function () {
     return;
   }
 
+  if (userName.length > 15) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Name length should not longer than 15 letters',
+    });
+    return;
+  } else if (!(/^[a-zA-Z]$/.test(userName))) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Special character is not allowed',
+    });
+    return;
+  }
+
   if (userName && password && confirmPassword) {
     if (password !== confirmPassword) {
       Swal.fire({
