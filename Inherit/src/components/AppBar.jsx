@@ -9,7 +9,7 @@ function AppBar() {
   // if (location.pathname === '/') return null;
 
   const routes = [
-    { path: '/home', label: '首页' },
+    { path: '/', label: '首页' },
     { path: '/project', label: '非遗项目' },
     { path: '/user', label: '用户中心' },
     { path: '/relate', label: '相关资讯' },

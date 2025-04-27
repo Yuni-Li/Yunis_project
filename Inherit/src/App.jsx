@@ -7,7 +7,7 @@ import AppBar from './components/AppBar';
 
 function App () {
   const location = useLocation();
-  const isHome = (location.pathname === '/home');
+  const isHome = (location.pathname === '/');
   return (
     <Container $isHome={isHome}>
       <AppBar />
