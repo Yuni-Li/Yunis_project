@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2c57f7a2.css",
+    "main.js": "/static/js/main.c8c4aaf6.js",
+    "static/media/title.PNG": "/static/media/title.d4e21a13a5dc2f049d1d.PNG",
+    "static/media/漆器.jpeg": "/static/media/漆器.c17b12acd030452b3d93.jpeg",
+    "static/media/民歌.jpeg": "/static/media/民歌.3d89f4b72def7f20baa1.jpeg",
+    "static/media/荆河戏.jpeg": "/static/media/荆河戏.3575b158e38ec67a396c.jpeg",
+    "static/media/啰啰.jpeg": "/static/media/啰啰.d150243bb287291d4f76.jpeg",
+    "static/media/background.jpg": "/static/media/background.802af3a7304af670120c.jpg",
+    "static/media/铅锡.jpeg": "/static/media/铅锡.e82fc4501e624feadd04.jpeg",
+    "static/media/home.jpg": "/static/media/home.e1f5fcd72980bf85a0e0.jpg",
+    "static/media/鼓盆歌.jpeg": "/static/media/鼓盆歌.f0a1f3ceec499a811bbd.jpeg",
+    "static/media/说鼓子.jpeg": "/static/media/说鼓子.0ca12c4add30618131e7.jpeg",
+    "index.html": "/index.html",
+    "main.2c57f7a2.css.map": "/static/css/main.2c57f7a2.css.map",
+    "main.c8c4aaf6.js.map": "/static/js/main.c8c4aaf6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2c57f7a2.css",
+    "static/js/main.c8c4aaf6.js"
+  ]
+}
